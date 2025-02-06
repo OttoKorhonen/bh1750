@@ -12,10 +12,10 @@ impl<'a> Bh1750<'a> {
         Self { i2c, address }
     }
 
-    pub fn read(&mut self, command: Command) -> Result<[u8; 1], Error> {
-        let mut result = [0_u8; 1];
+    pub fn read(&mut self, command: Command) -> Result<u16, Error> {
+        let mut result = [0u8; 2];
         self.i2c.write_read(self.address, &[command as u8], &mut result)?;
-        Ok(result)
+        Ok(u16::from_be_bytes(result))
     }
 
     ///Waiting for measurement command.
