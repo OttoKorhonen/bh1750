@@ -1,7 +1,7 @@
 #![no_std]
 #![no_main]
 
-use bh1750::bh1750::BH1750;
+use bh1750::bh1750::{Bh1750, Command};
 use esp_backtrace as _;
 use esp_hal::delay::Delay;
 use esp_hal::i2c::master::{Config, I2c};
@@ -31,7 +31,7 @@ fn main() -> ! {
         },
     ).with_scl(scl).with_sda(sda);
 
-    let mut bh1750 = BH1750::new(&mut i2c, ADDRESS);
+    let mut bh1750 = Bh1750::new(&mut i2c, ADDRESS);
 
     bh1750.power_off().unwrap();
     bh1750.power_on().unwrap();
@@ -40,7 +40,8 @@ fn main() -> ! {
 
     let delay = Delay::new();
     loop {
-        let data = bh1750.one_time_h_resolution_mode().unwrap();
+        // let data = bh1750.one_time_h_resolution_mode().unwrap();
+        let data = bh1750.read(Command::OneTimeHResolutionMode).unwrap();
         println!("data: {:?}", data);
         delay.delay(500.millis());
     }

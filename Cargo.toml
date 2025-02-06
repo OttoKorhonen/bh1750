@@ -3,6 +3,17 @@ name = "bh1750"
 version = "0.1.0"
 edition = "2021"
 
+[lib] 
+name = "bh1750"
+path = "src/lib.rs"
+
+[features]
+default = ["esp32c3"]
+esp32 = ["esp-hal/esp32", "esp-backtrace/esp32", "esp-println/esp32"]
+esp32s2 = ["esp-hal/esp32s2", "esp-backtrace/esp32s2", "esp-println/esp32s2"]
+esp32s3 = ["esp-hal/esp32s3", "esp-backtrace/esp32s3", "esp-println/esp32s3"]
+esp32c3 = ["esp-hal/esp32c3", "esp-backtrace/esp32c3", "esp-println/esp32c3"]
+
 [dependencies]
 esp-backtrace = { version = "0.14.2", features = [
     "esp32c3",
