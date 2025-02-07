@@ -40,7 +40,6 @@ fn main() -> ! {
 
     let delay = Delay::new();
     loop {
-        // let data = bh1750.one_time_h_resolution_mode().unwrap();
         let data = bh1750.read(Command::OneTimeHResolutionMode).unwrap();
         println!("data: {:?}", data);
         delay.delay(500.millis());
