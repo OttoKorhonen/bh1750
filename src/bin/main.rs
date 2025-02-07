@@ -8,6 +8,8 @@ use esp_hal::i2c::master::{Config, I2c};
 use esp_hal::prelude::*;
 use esp_println::println;
 use esp_hal::gpio::{Level, Pull, OutputOpenDrain};
+use embedded_hal_bus::i2c::RefCellDevice;
+use core::cell::RefCell;
 
 #[entry]
 fn main() -> ! {
@@ -23,7 +25,7 @@ fn main() -> ! {
     let scl = OutputOpenDrain::new(_peripherals.GPIO9, Level::High, Pull::Up);
 
 
-    let mut i2c = I2c::new(
+    let i2c = I2c::new(
         _peripherals.I2C0,
         Config {
             frequency: 400u32.kHz(),
@@ -31,7 +33,11 @@ fn main() -> ! {
         },
     ).with_scl(scl).with_sda(sda);
 
-    let mut bh1750 = Bh1750::new(&mut i2c, ADDRESS);
+    let i2c_refcell = RefCell::new(i2c);
+
+    let shared_i2c_bus = RefCellDevice::new(&i2c_refcell);
+
+    let mut bh1750 = Bh1750::new(shared_i2c_bus, ADDRESS);
 
     bh1750.power_off().unwrap();
     bh1750.power_on().unwrap();

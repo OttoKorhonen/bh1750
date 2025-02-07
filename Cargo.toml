@@ -21,6 +21,7 @@ esp-backtrace = { version = "0.14.2", features = [
     "panic-handler",
     "println",
 ]}
+embedded-hal-bus = "0.1"
 embedded-hal = "1.0.0"
 
 esp-hal = { version = "0.22.0", features = [
