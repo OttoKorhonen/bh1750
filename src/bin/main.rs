@@ -35,7 +35,7 @@ fn main() -> ! {
 
     let i2c_refcell = RefCell::new(i2c);
 
-    let shared_i2c_bus = RefCellDevice::new(&i2c_refcell);
+    let shared_i2c_bus = RefCellDevice::new(i2c_refcell);
 
     let mut bh1750 = Bh1750::new(shared_i2c_bus, ADDRESS);
 

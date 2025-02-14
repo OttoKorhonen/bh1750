@@ -5,7 +5,7 @@ use core::error::Error;
 use core::fmt;
 use embedded_hal::i2c::I2c as HalI2c;
 
-pub struct Bh1750<I2C, E> {
+pub struct Bh1750< I2C, E> {
     pub i2c: I2C,
     pub address: u8,
     _error: core::marker::PhantomData<E>,
@@ -13,7 +13,7 @@ pub struct Bh1750<I2C, E> {
 
 impl<E: fmt::Debug> Error for Bh1750Error<E> {}
 
-impl<I2C, E> Bh1750<I2C, E>
+impl<I2C, E> Bh1750< I2C, E>
 where
     I2C: HalI2c<Error = E> ,
     E: fmt::Debug,
