@@ -3,7 +3,6 @@ use crate::bh1750::Command;
 use core::borrow::BorrowMut;
 use core::error::Error;
 use core::fmt;
-use embedded_hal::i2c::I2c as HalI2c;
 
 pub struct Bh1750< I2C, E> {
     pub i2c: I2C,
@@ -15,7 +14,7 @@ impl<E: fmt::Debug> Error for Bh1750Error<E> {}
 
 impl<I2C, E> Bh1750< I2C, E>
 where
-    I2C: HalI2c<Error = E> ,
+    I2C: embedded_hal::i2c::I2c<Error = E>,
     E: fmt::Debug,
 {
 
