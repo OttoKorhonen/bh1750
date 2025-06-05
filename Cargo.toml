@@ -11,36 +11,11 @@ path = "src/lib.rs"
 #No default
 default = []
 
-# ESP32-tuet
-esp32 = [
-    "esp-hal/esp32",
-]
-esp32s2 = [
-    "esp-hal/esp32s2",
-]
-esp32s3 = [
-    "esp-hal/esp32s3",
-]
-esp32c3 = [
-    "esp-hal/esp32c3",
-]
-
-rp-pico = ["rp-hal"]
-
-rp-linux = ["rppal"]
-
-
 [dependencies]
 log = "0.4.21"
 critical-section = "1.2.0"
 heapless = "0.8.0"
 embedded-hal = "1.0.0"
-
-esp-hal = { version = "0.23.1", optional = true }
-esp-backtrace = { version = "0.14.2", optional = true }
-rp-hal = { version = "0.0.2", optional = true }
-rppal = { version = "0.14", optional = true }
-
 
 [profile.dev]
 # Rust debug is too slow.
