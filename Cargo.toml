@@ -7,26 +7,5 @@ edition = "2021"
 name = "bh1750"
 path = "src/lib.rs"
 
-[features]
-#No default
-default = []
-
 [dependencies]
-log = "0.4.21"
-critical-section = "1.2.0"
-heapless = "0.8.0"
 embedded-hal = "1.0.0"
-
-[profile.dev]
-# Rust debug is too slow.
-# For debug builds always builds with some optimization
-opt-level = "s"
-
-[profile.release]
-codegen-units = 1        # LLVM can perform better optimizations using a single thread
-debug = 2
-debug-assertions = false
-incremental = false
-lto = 'fat'
-opt-level = 's'
-overflow-checks = false
